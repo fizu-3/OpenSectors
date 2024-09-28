@@ -1,4 +1,4 @@
-package fi.fcode.handlers;
+package fi.fcode.listeners;
 
 import fi.fcode.ProxyPlugin;
 import fi.fcode.packet.impl.SectorConfigurationRequestPacket;

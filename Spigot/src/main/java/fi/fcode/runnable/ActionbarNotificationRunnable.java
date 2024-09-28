@@ -2,7 +2,6 @@ package fi.fcode.runnable;
 
 import fi.fcode.SectorsPlugin;
 import fi.fcode.helpers.ChatHelper;
-import fi.fcode.sector.Sector;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

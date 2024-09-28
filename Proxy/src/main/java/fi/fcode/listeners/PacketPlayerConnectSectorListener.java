@@ -1,4 +1,4 @@
-package fi.fcode.handlers;
+package fi.fcode.listeners;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;

@@ -6,8 +6,6 @@ import fi.fcode.helpers.ChatHelper;
 import fi.fcode.helpers.NbtConverterHelper;
 import fi.fcode.helpers.SerializeHelper;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.MojangsonParseException;
-import net.minecraft.server.v1_8_R3.MojangsonParser;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.GameMode;
 import org.bukkit.Location;

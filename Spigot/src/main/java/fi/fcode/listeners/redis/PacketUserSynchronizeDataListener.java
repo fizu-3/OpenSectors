@@ -1,4 +1,4 @@
-package fi.fcode.handlers;
+package fi.fcode.listeners.redis;
 
 import fi.fcode.SectorsPlugin;
 import fi.fcode.data.User;

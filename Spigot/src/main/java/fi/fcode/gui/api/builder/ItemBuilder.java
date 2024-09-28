@@ -8,11 +8,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.*;
 
-import org.bukkit.DyeColor;
 import org.bukkit.potion.Potion;
 
 public class ItemBuilder {

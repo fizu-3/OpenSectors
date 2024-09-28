@@ -2,7 +2,6 @@ package fi.fcode.helpers;
 
 import fi.fcode.SectorsPlugin;
 import fi.fcode.data.User;
-import fi.fcode.packet.impl.PlayerConnectSectorPacket;
 import fi.fcode.packet.impl.UserSynchronizeDataPacket;
 import fi.fcode.sector.Sector;
 import org.bukkit.Bukkit;

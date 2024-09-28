@@ -12,7 +12,7 @@
     <name>Spigot</name>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -69,11 +69,11 @@
             <artifactId>spigot-local</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>nigga</systemPath>
+            <systemPath>E:/spigot-1.8.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>fi.fcode</groupId>
-            <artifactId>Commons</artifactId>
+            <artifactId>Common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

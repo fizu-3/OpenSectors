@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>fi.fcode</groupId>
-    <artifactId>Commons</artifactId>
+    <artifactId>Common</artifactId>
     <build>
         <defaultGoal>plugin install</defaultGoal>
         <plugins>
@@ -37,8 +37,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
                 <groupId>org.apache.maven.plugins</groupId>
                 <version>3.8.0</version>
@@ -52,8 +52,8 @@
         </resources>
     </build>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

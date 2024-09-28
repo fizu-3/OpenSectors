@@ -11,13 +11,13 @@
 
     <name>sectors-project</name>
     <modules>
-        <module>Commons</module>
+        <module>Common</module>
         <module>Spigot</module>
         <module>Proxy</module>
     </modules>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
