@@ -1,0 +1,8 @@
+name: Spigot
+version: '${project.version}'
+main: fi.fcode.SectorsPlugin
+
+commands:
+  channel:
+    aliases:
+      - ch
