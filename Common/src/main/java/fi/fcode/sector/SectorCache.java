@@ -34,6 +34,7 @@ public class SectorCache {
     public Optional<Sector> getSpawnSector() {
         return this.sectorMap.values().stream().filter(sector -> sector.getSectorType().equals(SectorType.SPAWN)).filter(Sector::isOnline).findFirst();
     }
+
     public static boolean isIn(final Location location, final Sector sector) {
         return location.getBlockX() > sector.getMinX() && location.getBlockX() < sector.getMaxX() && location.getBlockZ() > sector.getMinZ() && location.getBlockZ() < sector.getMaxZ();
     }

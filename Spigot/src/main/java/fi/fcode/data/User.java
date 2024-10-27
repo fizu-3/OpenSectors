@@ -13,7 +13,7 @@ public class User {
     private String name,nbtString,lastLocation;
     private UUID uuid;
     private int gamemode,heldSlot;
-
+    private long redirectTime;
 
     public User(Player player) {
 
@@ -43,6 +43,15 @@ public class User {
         entityPlayer.b(nbtTagCompound);
         this.nbtString = nbtTagCompound.toString();
     }
+
+    public boolean isRedirecting() {
+        return this.redirectTime + 5000L > System.currentTimeMillis();
+    }
+
+    public void setRedirecting(final boolean redirecting) {
+        this.redirectTime = redirecting ? System.currentTimeMillis() : 0L;
+    }
+
     public int getHeldSlot() {
         return heldSlot;
     }

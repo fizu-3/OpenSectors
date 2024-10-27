@@ -22,12 +22,11 @@ public class PlayerMoveListener implements Listener {
         Location goToLocation = event.getTo();
 
         Optional<User> userOptional = SectorsPlugin.getInstance().getUserCache().getUser(player.getUniqueId());
-        if(!userOptional.isPresent()) {
-            return;
-        }
+
         Optional<Sector> sectorOptional = SectorsPlugin.getInstance().getSectorCache().getSectorByLocation(goToLocation);
 
-        if(!sectorOptional.isPresent()) {
+
+        if(!sectorOptional.isPresent() || !userOptional.isPresent()) {
             return;
         }
         sectorOptional.ifPresent(sector -> {
@@ -38,7 +37,11 @@ public class PlayerMoveListener implements Listener {
                 player.sendMessage(ChatHelper.colored("&4Sektor " + sector.getId() + " z jakim probujesz sie polaczyc jest niedostepny"));
                 return;
             }
-            PlayerTransferHelper.connect(userOptional.get(), sector);
+            User user = userOptional.get();
+            if(!user.isRedirecting()) {
+                user.setRedirecting(true);
+                PlayerTransferHelper.connect(user, sector);
+            }
         });
 
     }

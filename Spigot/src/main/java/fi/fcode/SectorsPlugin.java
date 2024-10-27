@@ -5,12 +5,10 @@ import fi.fcode.configuration.ConfigurationHelper;
 import fi.fcode.configuration.impl.configuration.ClientConfiguration;
 import fi.fcode.data.cache.UserCache;
 import fi.fcode.gui.api.GuiActionHandler;
+import fi.fcode.listeners.*;
 import fi.fcode.listeners.redis.PacketSectorConfigurationResponseListener;
 import fi.fcode.listeners.redis.PacketSectorInformationUpdateListener;
 import fi.fcode.listeners.redis.PacketUserSynchronizeDataListener;
-import fi.fcode.listeners.PlayerJoinListener;
-import fi.fcode.listeners.PlayerMoveListener;
-import fi.fcode.listeners.PlayerQuitListener;
 import fi.fcode.packet.impl.SectorConfigurationRequestPacket;
 import fi.fcode.scoreboard.SpawnScoreboard;
 import fi.fcode.scoreboard.api.Assemble;
@@ -87,7 +85,10 @@ public final class SectorsPlugin extends JavaPlugin {
                 new PlayerMoveListener(),
                 new PlayerJoinListener(),
                 new GuiActionHandler(),
-                new PlayerQuitListener()
+                new PlayerQuitListener(),
+                new PlayerSectorInteractListener(),
+                new PlayerTeleportListener(),
+                new PlayerDeathListener()
         }).forEach(listener -> this.getServer().getPluginManager().registerEvents(listener,this));
     }
 }

@@ -4,7 +4,9 @@ import fi.fcode.SectorsPlugin;
 import fi.fcode.data.User;
 import fi.fcode.helpers.ChatHelper;
 import fi.fcode.helpers.NbtConverterHelper;
+import fi.fcode.helpers.PlayerTransferHelper;
 import fi.fcode.helpers.SerializeHelper;
+import fi.fcode.sector.Sector;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.GameMode;
@@ -30,7 +32,22 @@ public class PlayerJoinListener implements Listener {
         if(!userOptional.isPresent()) {
             SectorsPlugin.getInstance().getUserCache().createUser(player);
         }
+
         userOptional.ifPresent(user -> {
+
+            if(player.isDead()) {
+                Optional<Sector> sectorOptional = SectorsPlugin.getInstance().getSectorCache().getSpawnSector();
+                if(sectorOptional.isEmpty()) {
+                    player.kickPlayer(ChatHelper.colored("&cBrak wolnego servera"));
+                    return;
+                }
+
+                SectorsPlugin.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(SectorsPlugin.getInstance(), () -> {
+                    player.spigot().respawn();
+                    PlayerTransferHelper.connect(userOptional.get(),sectorOptional.get());
+                }, 2L);
+                return;
+            }
             Location location = SerializeHelper.deserializeLocation(user.getLastLocation());
 
             player.teleport(location);
