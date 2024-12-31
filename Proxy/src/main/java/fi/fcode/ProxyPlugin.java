@@ -7,8 +7,8 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import fi.fcode.configuration.ConfigurationHelper;
 import fi.fcode.configuration.impl.configuration.ProxyClientConfiguration;
-import fi.fcode.listeners.PacketPlayerConnectSectorListener;
-import fi.fcode.listeners.PacketSectorConfigurationRequestListener;
+import fi.fcode.listener.PacketPlayerConnectSectorListener;
+import fi.fcode.listener.PacketSectorConfigurationRequestListener;
 import fi.fcode.sector.SectorCache;
 import org.slf4j.Logger;
 
@@ -22,7 +22,7 @@ import java.io.File;
 public class ProxyPlugin {
     private final ProxyServer server;
     private final Logger logger;
-    private MessengerCache messengerCache;
+    private MessengerService messengerService;
     private SectorCache sectorCache;
     private static ProxyPlugin instance;
     @Inject
@@ -37,10 +37,10 @@ public class ProxyPlugin {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         ProxyClientConfiguration configuration = ConfigurationHelper.load(new File("config.json"),ProxyClientConfiguration.class);
-        this.messengerCache = new MessengerCache(configuration.redisWrapper.redisHost,configuration.redisWrapper.redisPort,configuration.redisWrapper.redisPassword);
-        this.messengerCache.setPacketSender("proxy");
-        this.messengerCache.subscribe("proxy",new PacketSectorConfigurationRequestListener());
-        this.messengerCache.subscribe("proxy",new PacketPlayerConnectSectorListener());
+        this.messengerService = new MessengerService(configuration.redisWrapper.redisHost,configuration.redisWrapper.redisPort,configuration.redisWrapper.redisPassword);
+        this.messengerService.setPacketSender("proxy");
+        this.messengerService.subscribe("proxy",new PacketSectorConfigurationRequestListener());
+        this.messengerService.subscribe("proxy",new PacketPlayerConnectSectorListener());
 
         this.sectorCache = new SectorCache();
         this.sectorCache.setCurrentSector("proxy");
@@ -51,8 +51,8 @@ public class ProxyPlugin {
 
     }
 
-    public MessengerCache getMessengerCache() {
-        return messengerCache;
+    public MessengerService getMessengerCache() {
+        return messengerService;
     }
 
     public SectorCache getSectorCache() {

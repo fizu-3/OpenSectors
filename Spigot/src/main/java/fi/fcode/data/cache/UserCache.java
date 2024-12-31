@@ -12,10 +12,15 @@ public class UserCache {
 
     private Map<UUID, User> users = new ConcurrentHashMap<>();
 
-    public User createUser(Player player) {
-        return users.put(player.getUniqueId(), new User(player));
+    public void createUser(Player player) {
+        users.put(player.getUniqueId(), new User(player));
     }
-    public Optional<User> getUser(UUID uuid) {
+
+    public void removeUser(UUID uuid) {
+        users.remove(uuid);
+    }
+
+    public Optional<User> findUserByUUID(UUID uuid) {
         return Optional.ofNullable(users.get(uuid));
     }
 

@@ -19,8 +19,6 @@ public final class ConfigurationHelper {
   private static final Gson GSON = new GsonBuilder().disableHtmlEscaping()
       .setPrettyPrinting().create();
 
-  private ConfigurationHelper() {
-  }
 
   public static <T extends ConfigurationData> T load(final File file, final Class<T> type,
       final Consumer<T> creationAction) {
@@ -28,8 +26,7 @@ public final class ConfigurationHelper {
       final T configuration =
           file.exists() ? deserializeConfiguration(Files.readAllBytes(file.toPath()), type)
               : type.newInstance();
-      final File parentFile = file.getParentFile();
-      configuration.file = file;
+        configuration.file = file;
       if (!file.exists()) {
         creationAction.accept(configuration);
         saveConfiguration(configuration);

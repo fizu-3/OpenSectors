@@ -1,6 +1,6 @@
 package fi.fcode.data;
 
-import fi.fcode.helpers.SerializeHelper;
+import fi.fcode.helper.SerializeHelper;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -12,7 +12,7 @@ public class User {
 
     private String name,nbtString,lastLocation;
     private UUID uuid;
-    private int gamemode,heldSlot;
+    private int gameMode,heldSlot;
     private long redirectTime;
 
     public User(Player player) {
@@ -21,12 +21,14 @@ public class User {
         this.uuid = player.getUniqueId();
         this.lastLocation = SerializeHelper.serializeLocation(player.getLocation());
 
-        this.gamemode = player.getGameMode().getValue();
+        this.gameMode = player.getGameMode().getValue();
         this.heldSlot = player.getInventory().getHeldItemSlot();
 
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final NBTTagCompound nbtTagCompound = new NBTTagCompound();
+
         entityPlayer.b(nbtTagCompound);
+
         this.nbtString = nbtTagCompound.toString();
     }
 
@@ -35,12 +37,14 @@ public class User {
         this.uuid = player.getUniqueId();
         this.lastLocation = SerializeHelper.serializeLocation(player.getLocation());
 
-        this.gamemode = player.getGameMode().getValue();
+        this.gameMode = player.getGameMode().getValue();
         this.heldSlot = player.getInventory().getHeldItemSlot();
 
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final NBTTagCompound nbtTagCompound = new NBTTagCompound();
+
         entityPlayer.b(nbtTagCompound);
+
         this.nbtString = nbtTagCompound.toString();
     }
 
@@ -56,8 +60,8 @@ public class User {
         return heldSlot;
     }
 
-    public int getGamemode() {
-        return gamemode;
+    public int getGameMode() {
+        return gameMode;
     }
 
     public String getName() {
@@ -88,7 +92,4 @@ public class User {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 }

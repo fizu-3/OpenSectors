@@ -1,14 +1,14 @@
 package fi.fcode;
 
-import fi.fcode.commands.ChannelCommand;
+import fi.fcode.command.ChannelCommand;
 import fi.fcode.configuration.ConfigurationHelper;
 import fi.fcode.configuration.impl.configuration.ClientConfiguration;
 import fi.fcode.data.cache.UserCache;
-import fi.fcode.gui.api.GuiActionHandler;
-import fi.fcode.listeners.*;
-import fi.fcode.listeners.redis.PacketSectorConfigurationResponseListener;
-import fi.fcode.listeners.redis.PacketSectorInformationUpdateListener;
-import fi.fcode.listeners.redis.PacketUserSynchronizeDataListener;
+import fi.fcode.inventory.api.GuiActionHandler;
+import fi.fcode.listener.*;
+import fi.fcode.listener.redis.PacketSectorConfigurationResponseListener;
+import fi.fcode.listener.redis.PacketSectorInformationUpdateListener;
+import fi.fcode.listener.redis.PacketUserSynchronizeDataListener;
 import fi.fcode.packet.impl.SectorConfigurationRequestPacket;
 import fi.fcode.scoreboard.SpawnScoreboard;
 import fi.fcode.scoreboard.api.Assemble;
@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public final class SectorsPlugin extends JavaPlugin {
     private static SectorsPlugin instance;
-    private MessengerCache messengerCache;
+    private MessengerService messengerService;
     private SectorCache sectorCache;
     private UserCache userCache;
     @Override
@@ -33,25 +33,25 @@ public final class SectorsPlugin extends JavaPlugin {
         this.sectorCache = new SectorCache();
         this.sectorCache.setCurrentSector(clientConfiguration.currentSector);
 
-        this.messengerCache = new MessengerCache(clientConfiguration.redis.redisHost,clientConfiguration.redis.redisPort,clientConfiguration.redis.redisPassword);
-        this.messengerCache.setPacketSender(this.sectorCache.getCurrentSectorID());
+        this.messengerService = new MessengerService(clientConfiguration.redis.redisHost,clientConfiguration.redis.redisPort,clientConfiguration.redis.redisPassword);
+        this.messengerService.setPacketSender(this.sectorCache.getCurrentSectorID());
 
-        this.messengerCache.subscribe(this.sectorCache.getCurrentSectorID(),new PacketSectorConfigurationResponseListener());
-        this.messengerCache.subscribe("sectors",new PacketSectorInformationUpdateListener());
-        this.messengerCache.subscribe(this.sectorCache.getCurrentSectorID(),new PacketUserSynchronizeDataListener());
+        this.messengerService.subscribe(this.sectorCache.getCurrentSectorID(),new PacketSectorConfigurationResponseListener());
+        this.messengerService.subscribe("sectors",new PacketSectorInformationUpdateListener());
+        this.messengerService.subscribe(this.sectorCache.getCurrentSectorID(),new PacketUserSynchronizeDataListener());
 
         this.userCache = new UserCache();
 
         initListeners();
-        this.messengerCache.publish("proxy",new SectorConfigurationRequestPacket());
+        this.messengerService.publish("proxy",new SectorConfigurationRequestPacket());
 
 
     }
 
     @Override
     public void onDisable() {
-        if (Objects.nonNull(this.messengerCache)) {
-            this.messengerCache.shutdown();
+        if (Objects.nonNull(this.messengerService)) {
+            this.messengerService.shutdown();
         }
     }
 
@@ -72,8 +72,8 @@ public final class SectorsPlugin extends JavaPlugin {
         return instance;
     }
 
-    public MessengerCache getMessengerCache() {
-        return messengerCache;
+    public MessengerService getMessengerService() {
+        return messengerService;
     }
 
     public SectorCache getSectorCache() {
@@ -88,6 +88,7 @@ public final class SectorsPlugin extends JavaPlugin {
                 new PlayerQuitListener(),
                 new PlayerSectorInteractListener(),
                 new PlayerTeleportListener(),
+                new PlayerLoginListener(),
                 new PlayerDeathListener()
         }).forEach(listener -> this.getServer().getPluginManager().registerEvents(listener,this));
     }

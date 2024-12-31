@@ -1,6 +1,6 @@
 package fi.fcode.redis.codec;
 
-import fi.fcode.MessengerCache;
+import fi.fcode.MessengerService;
 import fi.fcode.packet.Packet;
 
 import java.nio.ByteBuffer;
@@ -22,7 +22,7 @@ public class FSTCodec implements RedisCodec<String, Packet> {
     public Packet decodeValue(ByteBuffer bytes) {
         byte[] buffer = new byte[bytes.remaining()];
         bytes.get(buffer);
-        return (Packet) MessengerCache.getInstance().getFstConfiguration().asObject(buffer);
+        return (Packet) MessengerService.getInstance().getFstConfiguration().asObject(buffer);
     }
 
     @Override
@@ -32,6 +32,6 @@ public class FSTCodec implements RedisCodec<String, Packet> {
 
     @Override
     public ByteBuffer encodeValue(Packet value) {
-        return ByteBuffer.wrap(MessengerCache.getInstance().getFstConfiguration().asByteArray(value));
+        return ByteBuffer.wrap(MessengerService.getInstance().getFstConfiguration().asByteArray(value));
     }
 }

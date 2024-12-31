@@ -12,6 +12,6 @@ public class SectorInformationUpdateRunnable implements Runnable {
             tps = d;
         }
 
-        SectorsPlugin.getInstance().getMessengerCache().publish("sectors",new SectorInformationUpdatePacket(SectorsPlugin.getInstance().getServer().getOnlinePlayers().size(),tps));
+        SectorsPlugin.getInstance().getMessengerService().publish("sectors",new SectorInformationUpdatePacket(SectorsPlugin.getInstance().getServer().getOnlinePlayers().size(),tps));
     }
 }

@@ -1,7 +1,7 @@
 package fi.fcode.scoreboard;
 
 import fi.fcode.SectorsPlugin;
-import fi.fcode.helpers.ChatHelper;
+import fi.fcode.helper.ChatHelper;
 import fi.fcode.scoreboard.api.AssembleAdapter;
 import org.bukkit.entity.Player;
 
@@ -25,6 +25,6 @@ public class SpawnScoreboard implements AssembleAdapter {
         lines.add("&7Online: &a" + SectorsPlugin.getInstance().getSectorCache().getCurrentSector().getPlayers());
         lines.add("&7TPS: &a" + Math.round(SectorsPlugin.getInstance().getSectorCache().getCurrentSector().getTps()));
         lines.add("");
-        return ChatHelper.fixColors(lines);
+        return ChatHelper.colored(lines);
     }
 }
