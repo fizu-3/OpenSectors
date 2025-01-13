@@ -63,6 +63,36 @@ The configuration of the sectors themselves is simple and clear. Just set the lo
 
 ```
 
+**Messages Configuration**
+
+```JSON
+{
+  "cannotPlaceBlockNearSectorMessage": "&CNie możesz stawiać bloków przy granicy sektora!",
+  "cannotBreakBlockNearSectorMessage": "&cNie możesz niszczyć bloków przy granicy sektora!",
+  "actionbarBorderMessage": "&7Jesteś blisko sektora &2{DISTANCE}&7m",
+  "sectorIsOfflineMessage": "&cSektor z którym się chcesz aktualnie połączyć jest aktualnie wyłączony!",
+  "noSectorsAvailableMessage": "&cBrak dostepnych sektorów",
+  "playerDataNotFoundMessage": "&cWystąpił problem podczas ładowania danych",
+  "playerDataLoadedMessage": "&aPomyslnie zaladowano twoje dane",
+  "playerAlreadyConnectedMessage": "&cJesteś aktualnie połączony z tym kanałem",
+  "spawnSectorNotFoundMessage": "&cNie odnaleziono dostepnego sektora spawna",
+  "scoreboardTitle": "&a&lOpenSectors 2.0",
+  "scoreboardLines": [
+    "",
+    "&7Polaczono z &a{SECTOR}",
+    "&7Uzyj: &a/ch &7aby ",
+    "&7zmienic kanal",
+    "",
+    "&7Online: &a{ONLINE}",
+    "&7TPS: &a{TPS}",
+    ""
+  ],
+  "connectedInfoTitle": "&a&lOpenSectors 2.0",
+  "connectedInfoSubTitle": "&7Pomyslnie &a&npolaczono &7z sektorem &a&n{SECTOR}"
+}
+
+```
+
 # Bug
 
 if you found a bug in OpenSectors write to me on discord **fizuxd**
