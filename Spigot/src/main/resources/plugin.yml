@@ -1,0 +1,9 @@
+name: sectors-spigot
+author: fajzu
+version: '${project.version}'
+main: net.fcode.SectorsPlugin
+
+commands:
+  channel:
+    aliases:
+      - ch
