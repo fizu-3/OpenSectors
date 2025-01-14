@@ -16,7 +16,7 @@ This is a Minecraft server plugin that divides the world into individual servers
 
 # Configuration 
 
-The configuration of the sectors themselves is simple and clear. Just set the location of each sector and provide the redia distribution data in config
+The configuration of the sectors themselves is simple and clear. Just set the location of each sector and provide the redis distribution data in config
 
 **Sectors configuration**
 
